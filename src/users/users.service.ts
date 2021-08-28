@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 
+
 @Injectable()
 export class UsersService {
 
@@ -29,8 +30,21 @@ export class UsersService {
         return this.repo.find({ email })
     }
 
-    update() {
+    //update user data
+    async update(id: number, attrs: Partial<User>) {
+        //find the user
+        const user = await this.findOne(id);
 
+        //if the id is not valid
+        if (!user) {
+            throw new Error("User Not Found!")
+        }
+
+        //update the user property
+        Object.assign(user, attrs);
+
+        //save the updated user value
+        return this.repo.save(user);
     }
 
     remove() {
