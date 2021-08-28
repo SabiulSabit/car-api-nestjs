@@ -19,4 +19,23 @@ export class UsersService {
     }
 
 
+    //find one user
+    findOne(id: number) {
+        return this.repo.findOne(id)
+    }
+
+    //find user with mail
+    find(email: string) {
+        return this.repo.find({ email })
+    }
+
+    update() {
+
+    }
+
+    remove() {
+
+
+    }
+
 }
