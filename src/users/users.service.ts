@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
@@ -37,7 +37,7 @@ export class UsersService {
 
         //if the id is not valid
         if (!user) {
-            throw new Error("User Not Found!")
+            throw new NotFoundException("User Not Found!")
         }
 
         //update the user property
@@ -55,7 +55,7 @@ export class UsersService {
 
         //if the id is not valid
         if (!user) {
-            throw new Error("User Not Found!")
+            throw new NotFoundException("User Not Found!")
         }
 
         return this.repo.remove(user);
