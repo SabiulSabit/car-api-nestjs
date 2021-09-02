@@ -2,6 +2,7 @@ import { Controller, Body, Post, Get, Patch, Delete, Param, Query, NotFoundExcep
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto'
 import { UsersService } from './users.service'
+import { SerializeInterceptor } from '../interceptors/serialize.interceptors'
 
 @Controller('auth')
 export class UsersController {
@@ -19,9 +20,11 @@ export class UsersController {
 
     }
 
-    @UseInterceptors(ClassSerializerInterceptor)
+    @UseInterceptors(SerializeInterceptor)
     @Get('/:id') // get a user by id
     async findUser(@Param('id') id: string) {
+        console.log("Handelr is running");
+
         const user = await this.usersService.findOne(parseInt(id));
 
         if (!user) {
