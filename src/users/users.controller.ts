@@ -6,6 +6,7 @@ import { Serialize } from '../interceptors/serialize.interceptors'
 import { UserDto } from './dtos/user.dto'
 
 @Controller('auth')
+@Serialize(UserDto)
 export class UsersController {
 
     //constructor
@@ -13,15 +14,12 @@ export class UsersController {
 
     }
 
-
     @Post('/signup') // singup routing
     createUser(@Body() body: CreateUserDto) {
 
         this.usersService.create(body.email, body.password);
-
     }
 
-    @Serialize(UserDto)
     @Get('/:id') // get a user by id
     async findUser(@Param('id') id: string) {
         console.log("Handelr is running");
