@@ -8,14 +8,17 @@ import {
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer'
-import { UserDto } from '../users/dtos//user.dto'
 
 export class SerializeInterceptor implements NestInterceptor {
+
+    constructor(private dto: any) {
+
+    }
 
     intercept(context: ExecutionContext, handeler: CallHandler): Observable<any> {
 
         return handeler.handle().pipe(map((data: any) => {
-            return plainToClass(UserDto, data, {
+            return plainToClass(this.dto, data, {
                 excludeExtraneousValues: true,
             })
 
