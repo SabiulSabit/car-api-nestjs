@@ -1,4 +1,4 @@
-import { Controller, Body, Post, Get, Patch, Delete, Param, Query, NotFoundException, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
+import { Controller, Body, Post, Get, Patch, Delete, Param, Query, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto'
 import { UsersService } from './users.service'
@@ -11,7 +11,6 @@ export class UsersController {
 
     //constructor
     constructor(private usersService: UsersService) {
-
     }
 
     @Post('/signup') // singup routing
