@@ -16,8 +16,12 @@ export class UsersController {
 
     @Post('/signup') // singup routing
     createUser(@Body() body: CreateUserDto) {
-
         return this.authService.singup(body.email, body.password)
+    }
+
+    @Post('/signin')
+    signin(@Body() body: CreateUserDto) {
+        return this.authService.signin(body.email, body.password)
     }
 
     @Get('/:id') // get a user by id
