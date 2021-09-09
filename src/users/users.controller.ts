@@ -19,7 +19,7 @@ export class UsersController {
         return this.authService.singup(body.email, body.password)
     }
 
-    @Post('/signin')
+    @Post('/signin') // signin a user
     signin(@Body() body: CreateUserDto) {
         return this.authService.signin(body.email, body.password)
     }
