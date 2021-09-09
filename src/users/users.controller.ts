@@ -4,19 +4,20 @@ import { UpdateUserDto } from './dtos/update-user.dto'
 import { UsersService } from './users.service'
 import { Serialize } from '../interceptors/serialize.interceptors'
 import { UserDto } from './dtos/user.dto'
+import { AuthService } from './auth.service'
 
 @Controller('auth')
 @Serialize(UserDto)
 export class UsersController {
 
     //constructor
-    constructor(private usersService: UsersService) {
+    constructor(private usersService: UsersService, private authService: AuthService) {
     }
 
     @Post('/signup') // singup routing
     createUser(@Body() body: CreateUserDto) {
 
-        this.usersService.create(body.email, body.password);
+        return this.authService.singup(body.email, body.password)
     }
 
     @Get('/:id') // get a user by id
