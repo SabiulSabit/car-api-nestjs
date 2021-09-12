@@ -14,6 +14,11 @@ export class UsersController {
     constructor(private usersService: UsersService, private authService: AuthService) {
     }
 
+    @Get('/currentuser')
+    currentUser(@Session() session: any) {
+        return this.usersService.findOne(session.userId);
+    }
+
     @Post('/signup') // singup routing
     async createUser(@Body() body: CreateUserDto, @Session() session: any) {
         const user = await this.authService.singup(body.email, body.password)
