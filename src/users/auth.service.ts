@@ -12,6 +12,7 @@ export class AuthService {
 
     }
 
+    //signup user
     async singup(email: string, password: string) {
 
         //check if the email is in use
@@ -31,6 +32,7 @@ export class AuthService {
         return user;
     }
 
+    //signin user
     async signin(email: string, password: string) {
 
         //find user with email
