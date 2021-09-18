@@ -3,6 +3,8 @@ import { AuthService } from './auth.service';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
 
+jest.useRealTimers();
+
 describe('AuthService', () => {
     let service: AuthService;
     let fakeUsersService: Partial<UsersService>;
@@ -38,15 +40,23 @@ describe('AuthService', () => {
         expect(hash).toBeDefined();
     })
 
-    it('throws an error if user sign up with an exsisting email', async () => {
-        fakeUsersService.find = () => Promise.resolve([{ id: 1, email: 'a', password: 'ads' } as User])
+    // it('throws an error if user sign up with an exsisting email', (done) => {
+    //     fakeUsersService.find = () => Promise.resolve([{ id: 1, email: 'a', password: 'ads' } as User])
 
-        try {
-            await service.singup('test@test.com', 'asdf')
-        } catch (err) {
-            // done();
-        }
+    //     try {
+    //         service.singup('test@test.com', 'asdf')
+    //     } catch (err) {
+    //         done();
+    //     }
+    // })
 
-    })
+    // it('throws if signin is called with an unused email', (done) => {
+    //     try {
+    //         service.signin('test@test.com', 'asdf')
+    //     } catch (err) {
+    //         done();
+
+    //     }
+    // })
 })
 
