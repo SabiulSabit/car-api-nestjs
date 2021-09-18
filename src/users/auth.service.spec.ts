@@ -58,5 +58,15 @@ describe('AuthService', () => {
 
     //     }
     // })
+
+    // it("throws if an invalid password is provided", (done) => {
+    //     fakeUsersService.find = () => Promise.resolve([{ email: 'asdf@asdf.com', password: "asd" } as User])
+
+    //     try {
+    //         service.signin('asdfasd@asdf.com', 'aasdfdf');
+    //     } catch (err) {
+    //         done();
+    //     }
+    // })
 })
 
