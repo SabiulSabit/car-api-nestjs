@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards, Patch, Param } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Patch, Param, Get, Query } from '@nestjs/common';
 import { CreateReportDto } from './dtos/create-report.dto';
 import { ReportDto } from './dtos/report.dto';
 import { ReportsService } from './reports.service';
@@ -8,12 +8,18 @@ import { User } from '../users/user.entity'
 import { Serialize } from '../interceptors/serialize.interceptors';
 import { ApproveReportDto } from './dtos/approve-report.dto'
 import { AdminGuard } from '../guards/admin.guard';
+import { GetEstimateDto } from './dtos/get-estimate.dto';
 
 
 @Controller('reports')
 export class ReportsController {
 
     constructor(private reportService: ReportsService) {
+
+    }
+
+    @Get()
+    getEstimate(@Query() query: GetEstimateDto) {
 
     }
 
