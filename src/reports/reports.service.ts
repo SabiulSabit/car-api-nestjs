@@ -12,11 +12,19 @@ export class ReportsService {
 
     }
 
-    createEstimate(estimateDtp: GetEstimateDto) {
+    //find some data from db
+    createEstimate({ make, model, lng, lat, year, mileage }: GetEstimateDto) {
         return this.repo.createQueryBuilder()
-            .select('*')
-            .where('make = :make', { make: estimateDtp.make })
-            .getRawMany()
+            .select('AVG(price)', 'price')
+            .where('make = :make', { make })
+            .andWhere('model = :model', { model })
+            .andWhere('lng - :lng BETWEEN -5 AND 5', { lng })
+            .andWhere('lat - :lat BETWEEN -5 AND 5', { lat })
+            .andWhere('year - :year BETWEEN -3 AND 3', { year })
+            .orderBy('ABS(mileage - :mileage)', "DESC")
+            .setParameter('mileage', mileage)
+            .limit(3)
+            .getRawOne()
     }
 
     //create a report
